@@ -8,6 +8,10 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
+import Home  from "./(tabs)";
+import SignUp from "./SignUp";
+import User from "./(tabs)/User";
+import TodayWorkout from "./(tabs)/TodayWorkout";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 
@@ -35,7 +39,6 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
-        
       </Stack>
     </ThemeProvider>
   );
