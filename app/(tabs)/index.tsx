@@ -3,7 +3,7 @@ import {
   View,
   Text,
   Pressable,
-  SafeAreaView,
+  Button,
   StyleSheet,
   Image,
   ImageBackground,
@@ -13,6 +13,7 @@ import { useNavigation } from "expo-router";
 import { ThemedText } from "@/components/ThemedText";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedView } from "@/components/ThemedView";
+import Picker from "@react-native-picker/picker";
 
 export default function Home() {
   const [user, setUser] = useState("Guest");
@@ -64,13 +65,12 @@ export default function Home() {
               </ThemedText>
               <ThemedText style={styles.paragraph}>
                 To maximize the benefits of this application, please{" "}
-                <Pressable
-                  style={styles.button}
+                <Button
+                  title="Sign Up"
                   onPress={() => navigation.navigate("SignUp")}
-                >
-                  <Text style={styles.buttonText}>something else</Text>
-                </Pressable>
-                .
+                />
+                  
+                
               </ThemedText>
             </>
           ) : (
@@ -111,8 +111,6 @@ const styles = StyleSheet.create({
     borderColor: "#b17028",
     borderWidth: 2,
     borderRadius: 10,
-    marginRight: "15%",
-    marginLeft: "15%",
   },
   title: {
     fontSize: 28,

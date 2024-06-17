@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { ThemedView } from "@/components/ThemedView";
 
 export default function TodayWorkout() {
   const [user, setUser] = useState("Guest");
@@ -99,9 +100,9 @@ export default function TodayWorkout() {
   }, []);
 
   return (
-    <View style={styles.card}>
+    <ThemedView >
       {user === "Guest" ? (
-        <View>
+        <View style={styles.card}>
           <Text style={styles.header}>Welcome to Today's Workout</Text>
           <Text>
             To log a new workout, please{" "}
@@ -192,7 +193,7 @@ export default function TodayWorkout() {
           />
         </View>
       )}
-    </View>
+    </ThemedView>
   );
 }
 

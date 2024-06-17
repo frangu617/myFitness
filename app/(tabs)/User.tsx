@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { SafeAreaView, View, Text, Button, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { ThemedView } from "@/components/ThemedView";
 
 interface UserData {
   name: string;
@@ -66,7 +67,7 @@ export default function User() {
   } = userData;
 
   return (
-    <View style={styles.card}>
+    <ThemedView style={styles.card}>
       {user !== "Guest" ? (
         <View style={styles.user}>
           <View style={styles.card}>
@@ -101,7 +102,7 @@ export default function User() {
           </Text>
         </View>
       )}
-    </View>
+    </ThemedView>
   );
 }
 
@@ -115,6 +116,13 @@ const styles = StyleSheet.create({
     boxShadowOpacity: 0.1,
     boxShadowOffset: { width: 0, height: 2 },
     boxShadowRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    verticalAlign: "center",
+    gridArea: "content",
+    display: "flex",
+    
   },
   user: {
     alignItems: "flex-start",
