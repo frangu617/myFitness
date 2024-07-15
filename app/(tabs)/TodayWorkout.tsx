@@ -100,7 +100,7 @@ export default function TodayWorkout() {
   }, []);
 
   return (
-    <ThemedView >
+    <ThemedView>
       {user === "Guest" ? (
         <View style={styles.card}>
           <Text style={styles.header}>Welcome to Today's Workout</Text>
@@ -121,20 +121,38 @@ export default function TodayWorkout() {
           {workoutLogged && todaysWorkout ? (
             <View style={styles.table}>
               <View style={styles.tableRow}>
-                <Text style={styles.tableHeader}>Type of Cardio</Text>
-                <Text style={styles.tableHeader}>Duration (min)</Text>
-                <Text style={styles.tableHeader}>Starting Heart Rate</Text>
-                <Text style={styles.tableHeader}>Max Heart Rate</Text>
-                <Text style={styles.tableHeader}>Calories Burned</Text>
-                <Text style={styles.tableHeader}>Effort</Text>
+                <Text style={[styles.tableCell, styles.tableHeader]}>
+                  Type of Cardio
+                </Text>
+                <Text style={[styles.tableCell, styles.tableHeader]}>
+                  Duration (min)
+                </Text>
+                <Text style={[styles.tableCell, styles.tableHeader]}>
+                  Starting Heart Rate
+                </Text>
+                <Text style={[styles.tableCell, styles.tableHeader]}>
+                  Max Heart Rate
+                </Text>
+                <Text style={[styles.tableCell, styles.tableHeader]}>
+                  Calories Burned
+                </Text>
+                <Text style={[styles.tableCell, styles.tableHeader]}>
+                  Effort
+                </Text>
               </View>
               <View style={styles.tableRow}>
-                <Text>{todaysWorkout.cardio}</Text>
-                <Text>{todaysWorkout.duration}</Text>
-                <Text>{todaysWorkout.startHeartRate}</Text>
-                <Text>{todaysWorkout.maxHeartRate}</Text>
-                <Text>{todaysWorkout.caloriesBurned}</Text>
-                <Text>{todaysWorkout.effort}</Text>
+                <Text style={styles.tableCell}>{todaysWorkout.cardio}</Text>
+                <Text style={styles.tableCell}>{todaysWorkout.duration}</Text>
+                <Text style={styles.tableCell}>
+                  {todaysWorkout.startHeartRate}
+                </Text>
+                <Text style={styles.tableCell}>
+                  {todaysWorkout.maxHeartRate}
+                </Text>
+                <Text style={styles.tableCell}>
+                  {todaysWorkout.caloriesBurned}
+                </Text>
+                <Text style={styles.tableCell}>{todaysWorkout.effort}</Text>
               </View>
             </View>
           ) : (
@@ -227,6 +245,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 10,
+  },
+  tableCell: {
+    flex: 1,
+    textAlign: "center",
   },
   tableHeader: {
     fontWeight: "bold",
