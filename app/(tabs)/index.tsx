@@ -8,27 +8,28 @@ import {
   Image,
   ImageBackground,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "expo-router";
+import { useNavigation } from "@react-navigation/native";
 import { ThemedText } from "@/components/ThemedText";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedView } from "@/components/ThemedView";
 import Picker from "@react-native-picker/picker";
+import { auth } from "../firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function Home() {
-  const [user, setUser] = useState("Guest");
+  const [user, setUser] = useState<string | null>(null);
   const navigation = useNavigation();
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const storedUserData = await AsyncStorage.getItem("userData");
-      if (storedUserData) {
-        const parsedUserData = JSON.parse(storedUserData);
-        setUser(parsedUserData.name || "Guest");
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser.displayName || "User");
+      } else {
+        setUser(null);
       }
-    };
+    });
 
-    fetchUserData();
+    return () => unsubscribe();
   }, []);
 
   return (
@@ -49,7 +50,7 @@ export default function Home() {
       <ThemedView style={styles.container}>
         <View>
           <ThemedText style={styles.title}>Welcome to My Fitness</ThemedText>
-          {user === "Guest" ? (
+          {user === null ? (
             <>
               <ThemedText style={styles.paragraph}>
                 My Fitness is a comprehensive application designed to assist you
@@ -69,8 +70,21 @@ export default function Home() {
                   title="Sign Up"
                   onPress={() => navigation.navigate("SignUp")}
                 />
-                  
-                
+                <Pressable
+                  onPress={() => navigation.navigate("Login")}
+                  style={({ pressed }) => ({
+                    opacity: pressed ? 0.5 : 1,
+                  })}
+                >
+                  <Text
+                    style={{
+                      color: "blue",
+                      textDecorationLine: "underline",
+                    }}
+                  >
+                    Login
+                  </Text>
+                </Pressable>
               </ThemedText>
             </>
           ) : (
